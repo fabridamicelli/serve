@@ -16,6 +16,7 @@ do
           echo "options:"
           echo "-h, --help  show brief help"
           echo "-g, --gpu specify for gpu build"
+          echo "-bi, --baseimage specify base docker image. Example: nvidia/cuda:11.7.0-cudnn8-runtime-ubuntu20.04 "
           echo "-t, --tag specify tag name for docker image"
           echo "-n, --nightly specify to build with TorchServe nightly"
           exit 0
@@ -24,6 +25,11 @@ do
           MACHINE=gpu
           DOCKER_TAG="pytorch/torchserve-kfs:latest-gpu"
           BASE_IMAGE="pytorch/torchserve:latest-gpu"
+          shift
+          ;;
+        -bi|--baseimage)
+          BASE_IMAGE="$2"
+          shift
           shift
           ;;
         -d|--dev)
